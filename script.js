@@ -1,3 +1,8 @@
+let display = document.querySelector('.upperText');
+const numbers = document.querySelectorAll('.number');
+
+let inputNumbers = null;
+
 function add(a, b) {
     return a + b;
 }
@@ -10,23 +15,41 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 }
-function operate(operator, arg1, arg2) {
+
+function operate(operator, a, b) {
     switch(operator) {
         case '+':
-            add(arg1, arg2);
+            add(a, b);
             break;
 
         case '-':
-            subtract(arg1, arg2);
+            subtract(a, b);
             break;
 
         case '*':
-            multiply(arg1, arg2);
+            multiply(a, b);
             break;
         
         case '/':
-            divide(arg1, arg2);
+            divide(a, b);
             break;
     }
-
 }
+numbers.forEach(number => number.addEventListener("click", function() {
+   display.innerText = display.innerText + number.innerText;
+   inputNumbers = parseFloat(display.innerText);
+   console.log(inputNumbers);
+}));
+
+function clearCalc() {
+    inputNumbers = null;
+    display.innerText = '';
+}
+
+
+
+
+
+
+
+
