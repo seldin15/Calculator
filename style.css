@@ -53,6 +53,7 @@
 
 .lowerText {
     color: rgba(53,53,53, 0.3);
+    font-size: 62px;
 }
 
 .upperText {
@@ -62,6 +63,7 @@
     top: 0;
     right: 0;
     color: rgba(53, 53, 53);
+    font-size: 62px;
 }
 
 .calculatorNumberGrid {
