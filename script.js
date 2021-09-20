@@ -2,8 +2,8 @@ let display = document.querySelector('.upperText');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = null;
+let secondNumber = null;
 let operator1;
 
 function add(a, b) {
@@ -28,36 +28,47 @@ function mod(a, b) {
 }
 
 function operate(operator, a, b) {
+    let result = 0;
     switch(operator) {
         case '+':
-            add(a, b);
+            result = add(a, b);
             break;
 
         case '-':
-            subtract(a, b);
+            result = subtract(a, b);
             break;
 
         case '*':
-            multiply(a, b);
+            result = multiply(a, b);
             break;
         
         case '/':
-            divide(a, b);
+            result = divide(a, b);
             break;
     }
+    return result;
 }
 
 function clearCalc() {
-    firstNumber = 0;
-    secondNumber = 0;
+    firstNumber = null;
+    secondNumber = null;
     operator1 = null;
     display.innerText = '';
 }
 
 numbers.forEach(number => number.addEventListener("click", function() {
     if(display.innerText.length < 10) {
-        display.innerText = display.innerText + number.innerText;
+        if(firstNumber == null && secondNumber == null) {
+        display.textContent = number.innerText;
         firstNumber = parseFloat(display.innerText);
+        console.log(firstNumber);
+    }
+       else if(firstNumber != null && secondNumber == null && operator1 != null) {  
+            display.innerText = '';     
+            display.innerText = display.innerText + number.innerText;
+            secondNumber = parseFloat(display.innerText);
+            console.log(secondNumber);
+        }
 }
 }));
 
@@ -69,25 +80,24 @@ operators.forEach(operator => operator.addEventListener("click", function(){
 
         case '+':
             operator1 = '+';
-            checkForNumbers();
             break;
 
         case '=':
-            operate(operator1, firstNumber, secondNumber);
+            display.innerText = operate(operator1, firstNumber, secondNumber);
             break;
 
             
     }
 }));
 
-function checkForNumbers() {
+/*function checkForNumbers() {
     if(firstNumber !== 0 && secondNumber == 0 ) {
         display.innerText = '';
         secondNumber = parseFloat(display.innerText);
         console.log(secondNumber);
     }
 }
-
+*/
 
 
 
