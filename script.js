@@ -58,14 +58,14 @@ function clearCalc() {
 
 numbers.forEach(number => number.addEventListener("click", function() {
     if(display.innerText.length < 10) {
-        if(firstNumber == null && secondNumber == null) {
-        display.textContent = number.innerText;
+        if(operator1 == null) {
+        display.innerText = display.innerText + number.innerText;
         firstNumber = parseFloat(display.innerText);
         console.log(firstNumber);
     }
-       else if(firstNumber != null && secondNumber == null && operator1 != null) {  
-            display.innerText = '';     
-            display.innerText = display.innerText + number.innerText;
+       else if(operator1 != null && operator1 != '=') {  
+            display.innerText = secondNumber;    
+            display.textContent = display.innerText + number.innerText;
             secondNumber = parseFloat(display.innerText);
             console.log(secondNumber);
         }
@@ -90,14 +90,7 @@ operators.forEach(operator => operator.addEventListener("click", function(){
     }
 }));
 
-/*function checkForNumbers() {
-    if(firstNumber !== 0 && secondNumber == 0 ) {
-        display.innerText = '';
-        secondNumber = parseFloat(display.innerText);
-        console.log(secondNumber);
-    }
-}
-*/
+
 
 
 
