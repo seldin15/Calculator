@@ -8,6 +8,7 @@ let firstNumber = null;
 let secondNumber = null;
 let operator1;
 let result = null;
+display.textContent = '0';
 
 function add(a, b) {
     return a + b;
@@ -70,6 +71,7 @@ function clearCalc() {
     result = 0;
     display.innerText = '';
     dot.disabled = false;
+    equals.disabled = false;
 
 }
 
@@ -77,20 +79,17 @@ function clearCalc() {
 numbers.forEach(number => number.addEventListener("click", function() {
     if(display.innerText.length < 10) {
       if(operator1 == null) {
-        display.textContent = display.innerText + number.innerText;
-        firstNumber = parseFloat(display.innerText);
-        console.log(firstNumber);
-
+        display.textContent += number.innerText;
+        firstNumber = parseFloat(display.textContent);
+        console.log(display.textContent);
         if(number.innerText == '.') {
             dot.disabled = true;
        }
     }
        else if(firstNumber && operator1 != null) { 
             dot.disabled = false;
-            display.innerText = secondNumber; 
-            display.textContent = display.innerText + number.innerText; 
-            secondNumber = parseFloat(display.innerText);
-            console.log(secondNumber);
+            display.textContent += number.innerText;
+            secondNumber = parseFloat(display.textContent);
             if(number.innerText == '.') {
                 dot.disabled = true;
             }
@@ -110,30 +109,36 @@ operators.forEach(operator => operator.addEventListener("click", function(){
 
         case '+':
             operator1 = '+';
+            display.innerText = '';
             break;
         
         case '-':
             operator1 = '-';
+            display.innerText ='';
             break;
 
         case '×':
             operator1 = '*';
+            display.innerText ='';
             break;
 
         case '÷':
             operator1 = '/';
+            display.innerText ='';
             break;
 
         case 'X²':
             operator1 = '^';
+            display.innerText ='';
             break;
         
         case '%':
             operator1 = '%';
+            display.innerText ='';
             break;
 
         case '=':
-            display.innerText = +parseFloat(operate(operator1, firstNumber, secondNumber)).toFixed(1);
+            display.innerText = +parseFloat(operate(operator1, firstNumber, secondNumber)).toFixed(2);
             firstNumber = null;
             secondNumber = null;
             operator1 = null;
