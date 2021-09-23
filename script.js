@@ -69,6 +69,7 @@ function clearCalc() {
     operator1 = null;
     result = 0;
     display.innerText = '';
+    dot.disabled = false;
 
 }
 
@@ -80,17 +81,17 @@ numbers.forEach(number => number.addEventListener("click", function() {
         firstNumber = parseFloat(display.innerText);
         console.log(firstNumber);
 
-        if(display.textContent.includes('.')) {
+        if(number.innerText == '.') {
             dot.disabled = true;
-        }
+       }
     }
        else if(firstNumber && operator1 != null) { 
-            
+            dot.disabled = false;
             display.innerText = secondNumber; 
             display.textContent = display.innerText + number.innerText; 
             secondNumber = parseFloat(display.innerText);
             console.log(secondNumber);
-            if(display.textContent.includes('.')) {
+            if(number.innerText == '.') {
                 dot.disabled = true;
             }
         }
