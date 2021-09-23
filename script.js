@@ -1,6 +1,8 @@
 let display = document.querySelector('.upperText');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
+const equals = document.getElementById('equals');
+const dot = document.getElementById('dot');
 
 let firstNumber = null;
 let secondNumber = null;
@@ -67,21 +69,36 @@ function clearCalc() {
     operator1 = null;
     result = 0;
     display.innerText = '';
+
 }
+
 
 numbers.forEach(number => number.addEventListener("click", function() {
     if(display.innerText.length < 10) {
-        if(operator1 == null) {
-        display.innerText = display.innerText + number.innerText;
+      if(operator1 == null) {
+        display.textContent = display.innerText + number.innerText;
         firstNumber = parseFloat(display.innerText);
+        console.log(firstNumber);
+
+        if(display.textContent.includes('.')) {
+            dot.disabled = true;
+        }
     }
-       else if(operator1 != null && operator1 != '=') {  
-            display.innerText = secondNumber;    
-            display.textContent = display.innerText + number.innerText;
+       else if(firstNumber && operator1 != null) { 
+            
+            display.innerText = secondNumber; 
+            display.textContent = display.innerText + number.innerText; 
             secondNumber = parseFloat(display.innerText);
             console.log(secondNumber);
+            if(display.textContent.includes('.')) {
+                dot.disabled = true;
+            }
+        }
+        else if(secondNumber === null || operator1 === null) {
+            equals.disabled = true;
         }
 }
+
 }));
 
 operators.forEach(operator => operator.addEventListener("click", function(){
@@ -115,7 +132,11 @@ operators.forEach(operator => operator.addEventListener("click", function(){
             break;
 
         case '=':
-            display.innerText = operate(operator1, firstNumber, secondNumber);
+            display.innerText = +parseFloat(operate(operator1, firstNumber, secondNumber)).toFixed(1);
+            firstNumber = null;
+            secondNumber = null;
+            operator1 = null;
+            firstNumber = result;
             if(display.innerText.length > 10) {
                 display.innerText = 'OVERFLOW';
             }
