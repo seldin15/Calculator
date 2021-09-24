@@ -8,7 +8,6 @@ let firstNumber = null;
 let secondNumber = null;
 let operator1;
 let result = null;
-display.textContent = '0';
 
 function add(a, b) {
     return a + b;
@@ -94,6 +93,7 @@ numbers.forEach(number => number.addEventListener("click", function() {
                 dot.disabled = true;
             }
         }
+
         else if(secondNumber === null || operator1 === null) {
             equals.disabled = true;
         }
@@ -149,6 +149,7 @@ operators.forEach(operator => operator.addEventListener("click", function(){
             break;
     }
 }));
+
 
 
 
